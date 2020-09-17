@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Status Microservice
+  description: |
+    This is the hot item status microservice that polls data from an excel file.
+  contact:
+    email: terry.chan@hohokusinc.com
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- name: status
+  description: Everything about status
+paths:
+  /status/nj:
+    get:
+      tags:
+      - status
+      summary: Get all status at Paterson
+      operationId: get_statusnj
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/statusInfo'
+                x-content-type: application/json
+        "404":
+          description: Item not found
+      x-openapi-router-controller: server.controllers.status_controller
+  /status/va:
+    get:
+      tags:
+      - status
+      summary: Get all status at Richmond
+      operationId: get_statusva
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/statusInfo'
+                x-content-type: application/json
+        "404":
+          description: Item not found
+      x-openapi-router-controller: server.controllers.status_controller
+components:
+  schemas:
+    statusInfo:
+      type: object
+      properties:
+        part_number:
+          type: string
+          example: 5H8000K-08
+        job_number:
+          type: string
+          example: 5H9700-5Z
+        quantity:
+          type: string
+          example: 50min
+        last_updated:
+          type: string
+          example: 7/16/2020 16:38
+        comments:
+          type: string
+          example: Need heat treat
+        due_date:
+          type: string
+          example: ASAP
+      example:
+        last_updated: 7/16/2020 16:38
+        quantity: 50min
+        comments: Need heat treat
+        due_date: ASAP
+        part_number: 5H8000K-08
+        job_number: 5H9700-5Z
+
