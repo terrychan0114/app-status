@@ -12,31 +12,21 @@ tags:
 - name: status
   description: Everything about status
 paths:
-  /status/nj:
+  /status:
     get:
       tags:
       - status
       summary: Get all status at Paterson
       operationId: get_statusnj
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/statusInfo'
-                x-content-type: application/json
-        "404":
-          description: Item not found
-      x-openapi-router-controller: server.controllers.status_controller
-  /status/va:
-    get:
-      tags:
-      - status
-      summary: Get all status at Richmond
-      operationId: get_statusva
+      parameters:
+      - name: sorting
+        in: query
+        description: This is getting the suggestion status with sorting order
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
       responses:
         "200":
           description: Ok

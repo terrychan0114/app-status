@@ -12,30 +12,19 @@ tags:
     description: Everything about status
 
 paths:
-  /status/nj:
+  /status:
     get:
       tags:
         - status
       summary: Get all status at Paterson
       operationId: getStatusnj
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/statusInfo'
-        '404':
-          description: Item not found
-          
-  /status/va:
-    get:
-      tags:
-        - status
-      summary: Get all status at Richmond
-      operationId: getStatusva
+      parameters:
+        - name: sorting
+          in: query
+          description: This is getting the suggestion status with sorting order
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
