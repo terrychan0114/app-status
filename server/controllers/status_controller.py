@@ -44,7 +44,6 @@ def get_statusnj(sorting, group=None):  # noqa: E501
             date = datetime.fromtimestamp(timestamp)
             df_json[i]["date_added"] = date.strftime("%m/%d/%Y")
             df_json[i].pop("Date added")
-            # logger.debug(type(df_json[i]["date_added"]))
         except:
             logger.debug("This is not a timestamp")
 
@@ -83,9 +82,9 @@ def get_statusnj(sorting, group=None):  # noqa: E501
         else:
             df_json_sort.append(df_json[i])
         
-        if sorting == "ticket_num":
-            return_json = sorted(df_json_sort,key=lambda i:i[sorting])
-        else:
-            return_json = sorted(df_json_sort,key=lambda i:i[sorting], reverse=True)
-        # logger.debug(df_json_sort)
+    if sorting == "ticket_num":
+        return_json = sorted(df_json_sort,key=lambda i:i[sorting])
+    else:
+        return_json = sorted(df_json_sort,key=lambda i:i[sorting], reverse=True)
+    # logger.debug(df_json_sort)
     return return_json
