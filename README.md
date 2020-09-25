@@ -19,5 +19,16 @@ To run the server on a Docker container, please execute the following from the r
 docker build -t app-status .
 
 # starting up a container
-docker run -p 8090:8080 -v <directory of the excel file for the daily updates>:/usr/src/app/doc app-status
+docker run -d -p 8083:8083 -v <directory of the excel file for the daily updates>:/usr/src/app/doc app-status
+docker run -d -p 8083:8083 -v /C/Users/ENGINEERING-FLN1/Documents/Automation/Projects/software_ws/demo_shared_drive:/usr/src/app/doc hkserver/app-ciboard
+```
+
+## Regenerating server
+
+Before regenerating the microservice, make sure you include the file that you **DON'T** want to delete in `.swagger-codegen-ignore`
+
+To regenerate the microservice, you can run the following code:
+```
+java -jar ./swagger-codegen-cli.jar generate -i ./app-status/api/v1.0.0.yaml -l python-flask -c ./app-status/api/config.json -o ./app-status -Dmodels
+java -jar ./swagger-codegen-cli.jar generate -i ./app-status/api/v1.0.0.yaml -l python-flask -c ./app-status/api/config.json -o ./app-status -Dapis
 ```

@@ -25,6 +25,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: group
+          in: query
+          description: This is getting a specific status group
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
